@@ -21,30 +21,5 @@ set -o pipefail
 # shellcheck disable=SC2034
 repos=(
     api
-    apiextensions-apiserver
     apimachinery
-    apiserver
-    cli-runtime
-    client-go
-    cloud-provider
-    cluster-bootstrap
-    code-generator
-    component-base
-    component-helpers
-    controller-manager
-    cri-api
-    csi-translation-lib
-    kube-aggregator
-    kube-controller-manager
-    kube-proxy
-    kube-scheduler
-    kubectl
-    kubelet
-    legacy-cloud-providers
-    metrics
-    mount-utils
-    pod-security-admission
-    sample-apiserver
-    sample-cli-plugin
-    sample-controller
 )

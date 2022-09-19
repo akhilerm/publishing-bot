@@ -44,7 +44,7 @@ if [ "${TO}" = "kubernetes" ]; then
     exit 1
 fi
 
-destination_repos=( $(curl -ks https://api.github.com/orgs/${TO}/repos | jq ".[].name" | tr -d '"') )
+destination_repos=( $(curl -ks https://api.github.com/users/${TO}/repos | jq ".[].name" | tr -d '"') )
 destination_repo_count=${#destination_repos[@]}
 
 if ! command -v gh > /dev/null; then

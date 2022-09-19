@@ -4,9 +4,8 @@ metadata:
   name: publisher-config
 data:
   config: |
-    source-org: kubernetes
+    source-org: akhilerm
     source-repo: kubernetes
-    target-org: kubernetes
-    rules-file: https://raw.githubusercontent.com/kubernetes/kubernetes/master/staging/publishing/rules.yaml
-    github-issue: 56876
+    target-org: akhilerm
+    rules-file: https://raw.githubusercontent.com/akhilerm/kubernetes/publishing-bot-test/staging/publishing/rules.yaml
     dry-run: false
