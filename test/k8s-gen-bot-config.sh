@@ -30,7 +30,9 @@ mkdir "${BOT_CONFIG_DIRECTORY}"
 # use the content from configmap in the data section
 sed -e '1,/config: |/d' configs/kubernetes-configmap.yaml > "${BOT_CONFIG_DIRECTORY}"/config
 # remove leading white spaces from the generated file
-sed -i '' "s/^[ \t]*//" "${BOT_CONFIG_DIRECTORY}"/config
+# The additional '' is added, since its required on *BSD sed version
+# also \t is not reccognized in non GNU sed implementation. Therefore bash string syntax is used.
+sed -i '' $'s/^[ \t]*//' "${BOT_CONFIG_DIRECTORY}"/config
 # remove the github-issue key
 sed -i '' '/github-issue/d' "${BOT_CONFIG_DIRECTORY}"/config
 # set dry run to true
