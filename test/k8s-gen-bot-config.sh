@@ -46,7 +46,7 @@ wget https://raw.githubusercontent.com/kubernetes/kubernetes/master/staging/publ
 chmod 666 "${BOT_CONFIG_DIRECTORY}"/rules
 # only work on master branch
 # yq is used to remove non master branch related rules
-docker run \
+nerdctl run \
     --rm \
     -v "${PWD}/${BOT_CONFIG_DIRECTORY}":/workdir \
     mikefarah/yq:4.32.2 -i 'del( .rules.[].branches.[] | select (.name != "master"))' rules

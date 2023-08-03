@@ -27,25 +27,25 @@ set -o xtrace
 BOT_CONFIG_DIRECTORY="${1:-bot-configs}"
 
 # create the docker volumes
-docker volume create local-go-workspace && docker volume create cache
+nerdctl volume create local-go-workspace && nerdctl volume create cache
 
-docker run --rm \
+nerdctl run --rm \
     --pull=never \
     -v local-go-workspace:/go-workspace \
     -v cache:/.cache \
     -v "${PWD}/${BOT_CONFIG_DIRECTORY}":/etc/bot-configs \
-    gcr.io/k8s-staging-publishing-bot/k8s-publishing-bot:latest \
+    akhilerm/containerd-publishing-bot:latest \
     /init-repo \
         --alsologtostderr \
         --config=/etc/bot-configs/config \
         --rules-file=/etc/bot-configs/rules
 
-docker run --rm \
+nerdctl run --rm \
     --pull=never \
     -v local-go-workspace:/go-workspace \
     -v cache:/.cache \
     -v "${PWD}/${BOT_CONFIG_DIRECTORY}":/etc/bot-configs \
-    gcr.io/k8s-staging-publishing-bot/k8s-publishing-bot:latest \
+    akhilerm/containerd-publishing-bot:latest \
     /publishing-bot \
         --alsologtostderr \
         --config=/etc/bot-configs/config \
@@ -53,4 +53,4 @@ docker run --rm \
         --dry-run=true
 
 # cleanup the docker volumes
-docker volume rm local-go-workspace && docker volume rm cache
+nerdctl volume rm local-go-workspace && nerdctl volume rm cache

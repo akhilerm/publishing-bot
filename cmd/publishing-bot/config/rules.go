@@ -48,7 +48,7 @@ func (c Source) String() string {
 	if repo == "" {
 		repo = "<source>"
 	}
-	return fmt.Sprintf("[repository %s, branch %s, subdir {%s}]", repo, c.Branch, c.Dir)
+	return fmt.Sprintf("[repository %s, branch %s, subdir {%s}]", repo, c.Branch, c.Dirs)
 }
 
 type BranchRule struct {
@@ -246,6 +246,9 @@ func fixDeprecatedFields(rules *RepositoryRules) {
 		for _, branch := range rule.Branches {
 			if len(branch.Source.Dirs) == 0 && branch.Source.Dir != "" {
 				branch.Source.Dirs = append(branch.Source.Dirs, branch.Source.Dir)
+				// The Dir field is made empty so that it is not used later and only the Dirs
+				// field is used.
+				branch.Source.Dir = ""
 			}
 		}
 	}
