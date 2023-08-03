@@ -242,13 +242,13 @@ func ensureValidGoVersion(version string) error {
 
 // this makes sure that old dir field values are copied over to new dirs field
 func fixDeprecatedFields(rules *RepositoryRules) {
-	for _, rule := range rules.Rules {
-		for _, branch := range rule.Branches {
+	for i, rule := range rules.Rules {
+		for j, branch := range rule.Branches {
 			if len(branch.Source.Dirs) == 0 && branch.Source.Dir != "" {
-				branch.Source.Dirs = append(branch.Source.Dirs, branch.Source.Dir)
+				rules.Rules[i].Branches[j].Source.Dirs = append(rules.Rules[i].Branches[j].Source.Dirs, branch.Source.Dir)
 				// The Dir field is made empty so that it is not used later and only the Dirs
 				// field is used.
-				branch.Source.Dir = ""
+				rules.Rules[i].Branches[j].Source.Dir = ""
 			}
 		}
 	}
